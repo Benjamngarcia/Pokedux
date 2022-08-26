@@ -5,7 +5,6 @@ import rootReducer from './reducers/rootReducer';
 import { compose, applyMiddleware, legacy_createStore as createStore } from 'redux';
 import thunk from 'redux-thunk'
 import { logger } from './middlewares'
-import './index.css';
 import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

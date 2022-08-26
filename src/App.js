@@ -1,58 +1,58 @@
 import { useEffect } from 'react'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
-import { Col, Spin } from 'antd';
+import { Container, Stack } from '@mui/material'
+import CircularProgress from '@mui/material/CircularProgress';
 import { PokemonList } from './components/PokemonList';
 import { Searcher } from './components/Searcher';
 import log from './static/logopokedux.svg'
-// import { getPokemon } from './api'
-// import { getPokemonWithDetails, setLoading } from './actions'
 import { fetchPokemonsWithDetails } from './slices/dataSlice';
 import './App.css';
 
 
 function App() {
 
-  // const [pokemons, setPokemons] = useState([]);
   const pokemons  = useSelector((state) => 
     state.data.pokemonsFiltered, shallowEqual
-    // .get('data').get('pokemons'), shallowEqual
     );
-  const loading = useSelector((state) => state.ui.loading);
-  // .get('ui').get('loading'));
-  const dispatcher = useDispatch();
-  // const pokemons = useSelector((state) => state.data.pokemons, shallowEqual);
 
-  
+  const loading = useSelector((state) => state.ui.loading);
+
+  const dispatcher = useDispatch();
+
   useEffect(() => { 
     dispatcher(fetchPokemonsWithDetails());
-    // const fetchPokemons = async() => {
-      // dispatcher(setLoading(true));
-      // const pokemonsRes = await getPokemon();
-      // const pokemonsDetailed = await Promise.all(pokemonsRes.map(pokemon => getPokemonDetails(pokemon)));
-      // dispatcher(getPokemonWithDetails(pokemonsRes))
-      // dispatcher(setLoading(false));
-    // };
-    // fetchPokemons();
   }, []);
   
   return (
-    <div className="App">
-      <Col span={4} offset={10}>
+    <Container sx={{
+      background: 'white'
+    }}>
+      <Stack sx={{
+        maxWidth: '200px',
+        margin: 'auto',
+        padding: '1rem 0px'
+      }}>
         <img src={log} alt="pokedux"/>
-      </Col>
-      <Col span={8} offset={8}>
+      </Stack>
+      <Stack sx={{
+        marginBottom: '3rem'
+      }}>
         <Searcher/>
-      </Col>
+      </Stack>
       {
         loading ? (
-          <Col offset={12}>
-            <Spin spinning size='large'/>
-          </Col>
-        ):(
+          <Stack xs={12}>
+            <CircularProgress 
+              size={80} 
+              thickness={5}
+              color="secondary"
+              sx={{padding: '2rem auto', margin: 'auto'}}/>
+          </Stack>
+        ) : (
           <PokemonList pokemons={pokemons}/>
         )
       }
-    </div>
+    </Container>
   );
 }
 

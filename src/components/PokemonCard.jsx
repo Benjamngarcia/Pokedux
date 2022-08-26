@@ -16,7 +16,7 @@ export function PokemonCard({ name, image, abilities, id, favorite }) {
         dispatch(setFavorite({pokemonId: id}))
     }
     return (
-        <Card 
+        <Card className="col-sm-12"
         title={name} 
         cover={<img src={image} alt={name}/>}  
         extra={<StarButton isFavorite={favorite} onClick={handleOnFavorite}/>}>
