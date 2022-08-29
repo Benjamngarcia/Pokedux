@@ -6,12 +6,13 @@ export function Searcher() {
     const dispatch = useDispatch();
 
     const handleOnChange = (e) => {
-        dispatch(setFilter(e.target.value));
+        dispatch(setFilter(e.target.value.toLowerCase()));
     }
     
     return(
         <TextField
             id="outlined-basic"
+            color="secondary"
             label="Busca poke"
             placeholder="Ingresa el nombre del poke que deseas buscar"
             variant="outlined"
