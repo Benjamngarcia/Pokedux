@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const getPokemon = () =>{
     try {
-        return axios.get(`https://pokeapi.co/api/v2/pokemon?limit=151&offset=0`).then(res => res.data.results);
+        return axios.get(`https://pokeapi.co/api/v2/pokemon?limit=1152&offset=0`).then(res => res.data.results);
     } catch (error) {
         console.log(error);
     }
